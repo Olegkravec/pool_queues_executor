@@ -63,7 +63,7 @@ public class ThreadPoolsRunner <queueType>{
                     }
 
                     //System.out.println("YUO HAVE " + runnedCommands + " RUNNED POOLS AND " + runnedCommands + " RUNNED COMMANDS");
-                    try { Thread.sleep(1000);
+                    try { Thread.sleep(recheckTime);
 
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -160,9 +160,7 @@ public class ThreadPoolsRunner <queueType>{
             ThreadPool pool = entry.getValue();
             runned+=pool.threadPool.getQueue().size();
         }
-        int calced = (runned / (queue_pool.size()+1)) + this.minimumCommands;
-        if(calced >= this.maxThreads) return this.maxThreads;
-            else return calced;
+        return ((this.maxThreads / (queue_pool.size()+1)));
     }
 
     public long getPollTaskCount(queueType T){
